@@ -17,7 +17,11 @@ public class ArraysManagement {
 		//countSpecials(a,n,k);
 		//printArray(removeEvenIntegers(a));
 		//reverseArray(a, 0, a.length-1);
-		findMinValue(a);
+//		findMinValue(a);
+		//removeZerosToEnd();
+		System.out.println("aabaa is " + isPalindrome("aabaa"));
+		System.out.println("madam is " + isPalindrome("madam"));
+		System.out.println("aaabaa is " + isPalindrome("aaabaa"));
 	}
 	
 	static void countSpecials(int a[], int n, int k){
@@ -91,4 +95,88 @@ public class ArraysManagement {
     public static void findMinValue(int [] a) {
     	System.out.println(Arrays.stream(a).min().getAsInt());
     }
+    
+    public static void findSecondMax(int [] a) {
+    	int max = Integer.MIN_VALUE;
+    	int secondMax = Integer.MIN_VALUE;
+    	
+    	for (int i=0; i< a.length; i++) {
+    		if (a[i]>max) {
+    		  max = a[i];
+    		}
+    		if (a[i]<max && a[i]>secondMax) {
+    			secondMax = a[i];
+    		}
+    	}
+    	System.out.println(max);
+    }
+    
+    public static void removeZerosToEnd() {
+    	// one pointer to the array traversal
+    	// one pointer to index that has zero
+    	int [] a = {8,1,0,2,1,0,3};
+    	System.out.println("Before the swap");
+    	printArray(a);
+    	int indexToZero = 0;
+    	for (int indexToArrayPos=0; indexToArrayPos<a.length; indexToArrayPos++) {
+    		// If current index points to non-zero
+    		// previously noted zero index is zero
+    		// always indexToZero <= indexToArrayPos
+    		// swap
+    		if (a[indexToArrayPos] != 0 && a[indexToZero] == 0) {
+    			int temp = a[indexToArrayPos];
+    			a[indexToArrayPos] = a[indexToZero];
+    			a[indexToZero] = temp;
+    		}
+    		// if swap happened indexToZero or currently it is not pointing
+    		// to zero
+    		// increment the index
+    		if (a[indexToZero]!=0) {
+    			indexToZero++;
+    		}
+    	}
+    	System.out.println("After the swap");
+    	printArray(a);
+    }
+    
+    public static int findMissingNumber(int [] a) {
+    	// An array with a range of numbers given
+    	// find missing number
+    	int rangeOfNumbers = a.length + 1;
+    	int sum = rangeOfNumbers * (rangeOfNumbers+1)/2;
+    	for (int i: a) {
+    		sum = sum - i;
+    	}
+    	return sum;
+    }
+    
+    public static boolean isPalindrome(String a) {
+    	if (a == null) {
+    		return false;
+    	}
+ 
+    	int startIndex = 0;
+    	int lastIndex  = a.length() - 1;
+    	while (startIndex < lastIndex) {
+    		if (a.charAt(startIndex) != a.charAt(lastIndex)) {
+    			return false;
+    		}
+    		startIndex++;
+			lastIndex--;
+    	}
+    	return true;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
